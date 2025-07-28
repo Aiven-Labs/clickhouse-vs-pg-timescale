@@ -1,0 +1,7 @@
+[project]
+name = "aiven-OLAP-selector"
+version = "0.1.0"
+description = "Streamlit app to help choose between PostgreSQL/TimescaleDB and ClickHouse"
+dependencies = [
+    "streamlit>=1.28.0"
+]
