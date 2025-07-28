@@ -1,6 +1,6 @@
-# Aiven OLAP Selector
+# Aiven OLAP Decision Calculator
 
-This is an application that helps you choose between Aiven for PostgreSQL with TimescaleDB or Aiven for ClickHouse based on your specific use case requirements.
+This is an application that helps you choose between [Aiven for PostgreSQL with the TimescaleDB Extension](https://aiven.io/docs/products/postgresql/concepts/timescaledb) or [Aiven for ClickHouse](https://aiven.io/clickhouse) based on your specific use case requirements.
 
 ## Features
 
