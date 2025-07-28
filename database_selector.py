@@ -2,7 +2,7 @@ import streamlit as st
 
 def main():
     st.title("Database Selection Assistant")
-    st.write("Answer these 5 questions to determine whether PostgreSQL with TimescaleDB or ClickHouse is better for your use case.")
+    st.write("Answer these 5 questions to determine whether Aiven for PostgreSQL w/ TimescaleDB or Aiven for ClickHouse is better for your use case.")
     
     st.subheader("Question 1: Data Volume")
     data_volume = st.selectbox(
@@ -115,13 +115,13 @@ def get_recommendation(data_volume, query_pattern, realtime_needs, data_retentio
     
     if timescaledb_score > clickhouse_score:
         return {
-            "recommendation": "PostgreSQL with TimescaleDB",
+            "recommendation": "Aiven for PostgreSQL w/ TimescaleDB",
             "score": timescaledb_score,
             "alternative_score": clickhouse_score
         }
     else:
         return {
-            "recommendation": "ClickHouse",
+            "recommendation": "Aiven for ClickHouse",
             "score": clickhouse_score,
             "alternative_score": timescaledb_score
         }
@@ -132,8 +132,8 @@ def display_recommendation(recommendation):
     # Display score visualization slider
     total_score = recommendation['score'] + recommendation['alternative_score']
     if total_score > 0:
-        timescaledb_percentage = (recommendation['alternative_score'] if recommendation['recommendation'] == "ClickHouse" else recommendation['score']) / total_score
-        clickhouse_percentage = (recommendation['score'] if recommendation['recommendation'] == "ClickHouse" else recommendation['alternative_score']) / total_score
+        timescaledb_percentage = (recommendation['alternative_score'] if recommendation['recommendation'] == "Aiven for ClickHouse" else recommendation['score']) / total_score
+        clickhouse_percentage = (recommendation['score'] if recommendation['recommendation'] == "Aiven for ClickHouse" else recommendation['alternative_score']) / total_score
         
         st.subheader("Solution Analysis")
         
@@ -148,8 +148,8 @@ def display_recommendation(recommendation):
         <div style="position: relative; height: 60px; margin: 20px 0;">
             <div style="position: absolute; top: 20px; left: 0; right: 0; height: 4px; background: linear-gradient(to right, #1f77b4 0%, #1f77b4 50%, #ff7f0e 50%, #ff7f0e 100%); border-radius: 2px;"></div>
             <div style="position: absolute; top: 15px; left: {marker_position * 100}%; transform: translateX(-50%); width: 14px; height: 14px; background: #333; border-radius: 50%; border: 2px solid white; box-shadow: 0 2px 4px rgba(0,0,0,0.3);"></div>
-            <div style="position: absolute; top: 35px; left: 0; font-size: 12px; color: #1f77b4; font-weight: bold;">TimescaleDB</div>
-            <div style="position: absolute; top: 35px; right: 0; font-size: 12px; color: #ff7f0e; font-weight: bold;">ClickHouse</div>
+            <div style="position: absolute; top: 35px; left: 0; font-size: 12px; color: #1f77b4; font-weight: bold;">Aiven for PostgreSQL</div>
+            <div style="position: absolute; top: 35px; right: 0; font-size: 12px; color: #ff7f0e; font-weight: bold;">Aiven for ClickHouse</div>
         </div>
         """
         
@@ -166,8 +166,8 @@ def display_recommendation(recommendation):
         else:
             st.info(f"Low Confidence - Consider evaluating both options")
     
-    if recommendation['recommendation'] == "PostgreSQL with TimescaleDB":
-        st.write("### Why TimescaleDB?")
+    if recommendation['recommendation'] == "Aiven for PostgreSQL w/ TimescaleDB":
+        st.write("### Why Aiven for PostgreSQL w/ TimescaleDB?")
         st.write("""
         - **ACID Compliance**: Full ACID transactions for data consistency
         - **SQL Familiarity**: Standard PostgreSQL with time-series extensions
@@ -176,13 +176,9 @@ def display_recommendation(recommendation):
         - **Flexible Schema**: Supports both relational and time-series data models
         """)
         
-        st.write("### Best for:")
-        st.write("- IoT sensor data, financial tick data, monitoring metrics")
-        st.write("- Applications requiring both transactional and analytical workloads")
-        st.write("- Teams with PostgreSQL expertise")
         
     else:
-        st.write("### Why ClickHouse?")
+        st.write("### Why Aiven for ClickHouse?")
         st.write("""
         - **Columnar Storage**: Optimized for analytical queries
         - **High Compression**: Efficient storage for large datasets
@@ -191,19 +187,15 @@ def display_recommendation(recommendation):
         - **Distributed Architecture**: Built for horizontal scaling
         """)
         
-        st.write("### Best for:")
-        st.write("- Large-scale analytics, data warehousing, business intelligence")
-        st.write("- High-volume data ingestion with batch processing")
-        st.write("- Teams comfortable with distributed systems")
     
     
     st.write("### Next Steps:")
-    if recommendation['recommendation'] == "PostgreSQL with TimescaleDB":
-        st.write("1. Set up PostgreSQL with TimescaleDB extension")
+    if recommendation['recommendation'] == "Aiven for PostgreSQL w/ TimescaleDB":
+        st.write("1. Set up Aiven for PostgreSQL with TimescaleDB extension")
         st.write("2. Design your hypertables for time-series data")
         st.write("3. Configure retention policies and compression")
     else:
-        st.write("1. Set up ClickHouse cluster")
+        st.write("1. Set up Aiven for ClickHouse cluster")
         st.write("2. Design your table schemas with appropriate engines")
         st.write("3. Configure data partitioning and replication")
 
